@@ -4,7 +4,7 @@ author: "Katherine Hoffman"
 date: 2020-12-11T01:13:14-05:00
 draft: false
 image: /img/tmle/tmle_crop.jpeg
-weight: 7
+weight: 6
 categories: ["statistics","R"]
 math: true
 tags: ["statistics","causal inference","R","lmtp","TMLE","Targeted Maximum Likelihood Estimation","introduction to TMLE","targeted learning"]
