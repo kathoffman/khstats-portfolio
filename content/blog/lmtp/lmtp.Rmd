@@ -16,7 +16,7 @@ output:
 ---
 
 
-A review static and dynamic treatment policies and introduction to modified treatment policies (MTPs). We discuss a motivation for learning about MTPs and several examples of research questions that can be answered using MTPs.
+We review static and dynamic treatment policies and introduce modified treatment policies (MTPs). We discuss a motivation for learning about MTPs and several examples of research questions that can be answered using MTPs.
 
 <!--more-->
 

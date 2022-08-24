@@ -2,11 +2,11 @@ baseurl: https://khstats.com/
 title: KH STATS
 theme: hugo-creative-portfolio-theme
 languageCode: en-us
-disqusShortname: ''
+disqusShortname: 'khstats'
 googleAnalytics: 'UA-136820093-1'
 params:
   copyright: '&copy;2022 Katherine Hoffman'
-  description: Blog posts about statistics, programming, and the role of the biostatistician.
+  description: Blog posts and illustrations about statistics, programming, and the role of the biostatistician.
   email: kathoffman.stats@gmail.com
   navlinks:
     - home: yes
