@@ -1,12 +1,12 @@
-baseurl: https://example.org/
+baseurl: https://khstats.com/
 title: KH STATS
 theme: hugo-creative-portfolio-theme
 languageCode: en-us
 disqusShortname: ''
-googleAnalytics: ''
+googleAnalytics: 'UA-136820093-1'
 params:
   copyright: '&copy;2022 Katherine Hoffman'
-  description: Describe your website
+  description: Blog posts about statistics, programming, and the role of the biostatistician.
   email: kathoffman.stats@gmail.com
   navlinks:
     - home: yes

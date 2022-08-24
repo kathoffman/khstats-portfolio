@@ -1,4 +1,0 @@
-"0","pred_a <- predict(fit_a)"
-"0","pred_b <- predict(fit_b)"
-"0","pred_c <- predict(fit_c)"
-"0","full_data_preds <- tibble(pred_a, pred_b, pred_c)"

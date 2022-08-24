@@ -1,5 +1,0 @@
-"0","dat_tmle <- tibble(Y = dat_obs$Y, A = dat_obs$A, Q_A, Q_0, Q_1)"
-"0","dat_tmle %>%"
-"0","  head() %>%"
-"0","  gt() %>%"
-"0","  tab_header(""TMLE Algorithm after Step 1"")"

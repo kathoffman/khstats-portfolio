@@ -1,6 +1,0 @@
-"0","ate_gcomp <- mean(dat_tmle$Q_1 - dat_tmle$Q_0)"
-"0","ate_gcomp"
-"1","[1]"
-"1"," 0.195287"
-"1","
-"

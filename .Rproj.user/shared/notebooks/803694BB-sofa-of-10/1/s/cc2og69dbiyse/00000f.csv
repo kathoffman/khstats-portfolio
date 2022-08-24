@@ -1,2 +1,0 @@
-"0","combos <- expand.grid(""lung"" = 0:4, ""liver"" = 0:4, ""heart"" = 0:4, ""blood"" = 0:4, ""brain"" = 0:4, ""kidney"" = 0:4)"
-"0","combos"

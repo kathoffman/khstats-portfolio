@@ -3,7 +3,7 @@ date: "2016-11-05T21:05:33+05:30"
 title: About me
 ---
 
-My name is Katherine (Kat) Hoffman. I am a research biostatistician based in New York City. I grew up in Michigan and received my M.S. in Biostatistics from the University of Michigan in 2018. Prior to that I earned a B.S. in Biochemistry from the University of Detroit Mercy. My CV is available [[here]](https://www.khstats.com/KatherineHoffman_CV_August2022.pdf).
+My name is Katherine (Kat) Hoffman. I am a research biostatistician based in New York City. I grew up in Michigan and received my M.S. in Biostatistics from the University of Michigan in 2018. Prior to that I earned a B.S. in Biochemistry from the University of Detroit Mercy. My CV is available [[here]](KatherineHoffman_CV_August2022.pdf).
 
 I began KH Stats in 2019 with the post [*A Day in the Life of a Biostatistician*](https://www.khstats.com/blog/ditl-biostats/). Since then, I've tried to write about statistics, programming, and career-related topics in ways I think my slightly-younger-self would have found useful. I am especially interested in creating content which helps bridge the communication gap between statistical methodologists, clinician-researchers, and analysts.
 

@@ -3,7 +3,7 @@ title: "Using ggplot2 to create Treatment Timelines with Multiple Variables"
 author: "Katherine Hoffman"
 weight: 4
 date: 2022-06-08T21:13:14-05:00
-image: /img/covid-trt-timeline.png 
+image: /img/trt-timeline/crop_swimmer.png 
 categories: ["R","data visualization"]
 tags: ["R","ggplot2","swimmer plots","treatment timelines","longitudinal survival"]
 output: 
@@ -19,8 +19,9 @@ An R code walkthrough for making customizable treatment timelines or "swimmer pl
 
 ***June 8, 2022.***
 
-
 > This post walks through code to create a timeline in `R` using `ggplot2`. These types of plots can help visualize **treatment or measurement patterns**, **time-varying covariates**, **outcomes**, and **loss to follow-up** in longitudinal data settings.
+
+You can view a corresponding slide deck I made for the 2022 R/Medicine 
 
 [***Skip the step-by-step, just the code, please!***](#just-the-code)
 

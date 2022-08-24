@@ -1,7 +1,0 @@
-"0","dat_tmle <- # add clever covariate data to dat_tmle"
-"0","  dat_tmle %>%"
-"0","  bind_cols("
-"0","         H_1 = H_1,"
-"0","         H_0 = H_0) %>%"
-"0","  mutate(H_A = case_when(A == 1 ~ H_1, # if A is 1 (treated), assign H_1"
-"0","                       A == 0 ~ H_0))  # if A is 0 (not treated), assign H_0"
