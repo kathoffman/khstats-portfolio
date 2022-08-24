@@ -90,20 +90,13 @@ Unless you get a hot swap PCB, you'll need a soldering iron, solder wire, someth
 
 These were the components I used. If I were to do it again I would pick another type of switch besides Cherry MX Brown... they work great but they're  a bit boring. I spent some time perusing builds on [reddit (r/Mechanical Keybards)](https://www.reddit.com/r/MechanicalKeyboards/) before I bought my components.
 
-*[Blue aluminum KBD75 V2 Case with acrylic midlayer to show RBG lighting](https://kbdfans.com/products/kbd75v2-custom-keyboard-diy-kit-1)
-
+- [Blue aluminum KBD75 V2 Case with acrylic midlayer to show RBG lighting](https://kbdfans.com/products/kbd75v2-custom-keyboard-diy-kit-1)
 - [KBD75 Rev 2.0 Solderable PCB](https://kbdfans.com/products/kbdfans-75-pcb-75)
-
 - [KBD75 Brass plate](https://kbdfans.com/products/kbd75-brass-plate)
-
 - [KBD75 Foam pad](https://kbdfans.com/products/kbd75-pcb-foam)
-
 - [Cherry screw in stabilizers](https://www.amazon.com/Genuine-Cherry-GMK-Screw-Stabilizers/dp/B082Z5P769)
-
 - [Cherry RGB Brown switches](https://www.amazon.com/Cherry-Switches-MX1A-L1NA-Mechanical-Keyboard/dp/B0852QJ8PJ?th=1)
-
 - [Retro blue and red keycaps](https://www.amazon.com/TAI-HAO-Profile-Keycaps-Compatible-Keyboards/dp/B08W56W35R/ref=sr_1_58?crid=1A8BUF5OB84RB&keywords=red+blue+keycaps+retro&qid=1655008111&sprefix=red+blue+keycaps+retro%2Caps%2C55&sr=8-58)
-
 - Soldering equipment: I borrowed my dad's [Hakko FX-601 iron](https://www.amazon.com/Hakko-FX601-02-Adjustable-Temperature-Controlled/dp/B00FZPSX3G) and used a [sharp cone-shaped tip](https://www.amazon.com/gp/product/B00B4T9KBG/ref=ppx_yo_dt_b_asin_title_o08_s00?ie=UTF8&psc=1). I also used [rosin core solder wire](https://www.homedepot.com/p/Forney-1-16-in-1-4-lb-Rosin-Core-60-40-Solder-38073/206471634), a [solder wick](https://www.amazon.com/Lesnow-No-Clean-Desoldering-Removal-Dispenser/dp/B094GZ6CPZ/ref=sr_1_1_sspa?keywords=solder+wick&qid=1655225989&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExUjlQTklXM1c4MTNEJmVuY3J5cHRlZElkPUEwNzYyODczMlZYVjQ4TzhSSVlXUCZlbmNyeXB0ZWRBZElkPUEwNjQ5NzAyMlpES0gxR05GM0o5JndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==) and [brass sponge]() for removing solder. I later purchased a [solder sucker](https://www.amazon.com/gp/product/B002MJMXD4/ref=ppx_yo_dt_b_asin_title_o07_s04?ie=UTF8&psc=1), which I recommend for removing soldering.
 
 ![*My components and tools, from left to right: a rag for touching up lubricant/solder, silicone lubricant, brass sponge for removing solder, solder wire, soldering iron with stand, scissors, tweezers, toothpicks, switches, stabilizers (black platic feet), screws, soft feet stickers, stabilizers (metal rods), case, key caps, PCB, brass plate, and foam pad. Not pictured: solder sucker that I purchased later.*](/img/keyboard/IMG_9073.png)
@@ -116,7 +109,7 @@ I'll briefly outline the steps to building the keyboard below. If you're actuall
 
 First you'll want to download a keyboard programming app like [VIA](https://www.caniusevia.com/), plug your keyboard into your computer, take a pair of tweezers, and test each point of key circuitry on your PCB plate.
 
-<video width="320" height="240" controls>
+<video width="100%" controls>
   <source src="/img/keyboard/testing_keys.mp4#t=0.1" type="video/mp4">
 </video>
 
@@ -130,7 +123,7 @@ If your PCB plate is working properly, go ahead and add lubricant and put togeth
 
 Time to click the stabilizers into place! You can put the respective keycaps on (space bar, shift, backspace, etc.) and make sure you like the feel at this point.
 
-<video width="320" height="240" controls>
+<video width="100%" controls>
   <source src="/img/keyboard/test_stabs.mp4#t=0.1" type="video/mp4">
 </video>
 
@@ -138,7 +131,7 @@ Time to click the stabilizers into place! You can put the respective keycaps on 
 
 You can now overlay your plate on the PCB and start clicking each key switch's metal prongs into the small holes on the PCB. You should feel a click when it locks into place, and the switches should not fall out if you flip the board over. 
 
-<video width="320" height="240" controls>
+<video width="100%"  controls>
   <source src="/img/keyboard/clicking_switches.mp4#t=0.1" type="video/mp4">
 </video>
 
@@ -146,7 +139,7 @@ You can now overlay your plate on the PCB and start clicking each key switch's m
 
 This was hands-down my favorite part of the entire process. Soldering (pronounced saw-der-ing) is SO much fun. There's a ton of videos online about it, and you can buy a kit to practice if you want, but honestly I just went for it. You basically melt a piece of metal (solder) and then place the soldering iron right next to the key switch prongs and PCB ring of metal to create an electrical conduction.
 
-<video width="200" height="400" controls>
+<video width="100%"  controls>
   <source src="/img/keyboard/soldering.mp4#t=0.1" type="video/mp4">
 </video>
 
@@ -160,7 +153,7 @@ This is what my final soldered PCB and switches looked like. Each of the keys ha
 
 Once all your keys' electrical connections work, you can add your key caps. Finally, stack all the pieces together (case, foam plate, plate/PCB/switches/keys) and tighten the necessary screws.
 
-<video width="200" height="400" controls>
+<video width="100%" controls>
   <source src="/img/keyboard/screws.mp4#t=0.1" type="video/mp4">
 </video>
 
@@ -168,7 +161,7 @@ Once all your keys' electrical connections work, you can add your key caps. Fina
 
 Enjoy the click-clack of your brand new custom mechanical keyboard!
 
-<video width="200" height="400" controls>
+<video width= "100%" controls>
   <source src="/img/keyboard/typing.mp4#t=0.1" type="video/mp4">
 </video>
 
