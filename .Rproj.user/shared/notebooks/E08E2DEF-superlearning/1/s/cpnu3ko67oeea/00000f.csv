@@ -1,0 +1,4 @@
+"0","cv_train_1 <- obs[-which(cv_index == 10),] # make a data set that contains all observations except those in k=1"
+"0","fit_1a <- glm(y ~ x2 + x4, data=cv_train_1) # fit the first linear regression on that training data"
+"0","fit_1b <- glm(y ~ x1 + x2 + x1*x3 + sin(x4), data=cv_train_1) # second LR fit on the training data"
+"0","fit_1c <- glm(y ~ x1*x2*x3, data=cv_train_1) # and the third LR"

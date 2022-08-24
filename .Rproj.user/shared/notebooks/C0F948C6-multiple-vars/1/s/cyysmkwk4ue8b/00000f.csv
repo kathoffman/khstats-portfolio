@@ -1,0 +1,11 @@
+"0","dat_long <- readRDS(here::here(""content/blog/trt-timelines/trt_timeline_data.rds""))"
+"0",""
+"0","id_key  <- data.frame(new_id = factor(sample(100:999, size=length(unique(dat_long$id)))), id = 1:length(unique(dat_long$id))) %>%"
+"0","  filter(id == 1  | id %in% sample(2:50, 29))"
+"0","dat_long <- readRDS(here::here(""content/blog/trt-timelines/trt_timeline_data.rds"")) |>   right_join(id_key) |>"
+"0","  select(id = new_id, everything(), -id)"
+"1","[38;5;253mJoining, by = ""id""[39m
+"
+"0","saveRDS(dat_long, here::here(""content/blog/trt-timelines/trt_timeline_data_30.rds""))"
+"0","write_csv(dat_long, here::here(""content/blog/trt-timelines/dat_trt_timeline.csv""))"
+"0",""

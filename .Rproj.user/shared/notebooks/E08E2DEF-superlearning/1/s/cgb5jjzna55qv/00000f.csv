@@ -1,0 +1,4 @@
+"0","cv_valid_1 <- obs[which(cv_index == 10),] # make a data set that only contains observations except in k=10"
+"0","pred_1a <- predict(fit_1a, newdata = cv_valid_1) # use that data set as the validation for all the models in the SL library"
+"0","pred_1b <- predict(fit_1b, newdata = cv_valid_1) "
+"0","pred_1c <- predict(fit_1c, newdata = cv_valid_1)"

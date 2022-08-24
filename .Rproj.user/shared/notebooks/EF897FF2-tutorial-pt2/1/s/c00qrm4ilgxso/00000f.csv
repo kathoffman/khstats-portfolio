@@ -1,0 +1,2 @@
+"0","g_w <- as.vector(predict(g)$pred) # Pr(A=1|W)"
+"0","H_1 <- 1/g_w"

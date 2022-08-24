@@ -1,0 +1,6 @@
+"0","Y <- dat_obs$Y"
+"0","W_A <- dat_obs %>% select(-Y) # remove the outcome to make a matrix of predictors (A, W1, W2, W3, W4) for SuperLearner"
+"0","Q <- SuperLearner(Y = Y, # Y is the outcome vector"
+"0","                  X = W_A, # W_A is the matrix of W1, W2, W3, W4, and A"
+"0","                  family=binomial(), # specify we have a binary outcome"
+"0","                  SL.library = sl_libs) # specify our superlearner library of LASSO, RF, and MARS"

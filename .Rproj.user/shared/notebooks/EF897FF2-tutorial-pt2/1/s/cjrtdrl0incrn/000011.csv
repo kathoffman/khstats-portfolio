@@ -1,0 +1,2 @@
+"0","W_A1 <- W_A %>% mutate(A = 1)  # data set where everyone received treatment"
+"0","Q_1 <- as.vector(predict(Q, newdata = W_A1)$pred) # predict on that everyone-exposed data set"

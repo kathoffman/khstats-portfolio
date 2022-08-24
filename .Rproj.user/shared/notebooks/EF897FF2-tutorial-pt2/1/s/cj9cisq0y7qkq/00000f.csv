@@ -1,0 +1,6 @@
+"0","A <- dat_obs$A"
+"0","W <- dat_obs %>% select(-Y, -A) # matrix of predictors that only contains the confounders W1, W2, W3, and W4"
+"0","g <- SuperLearner(Y = A, # outcome is the A (treatment) vector"
+"0","                  X = W, # W is a matrix of predictors"
+"0","                  family=binomial(), # treatment is a binomial outcome"
+"0","                  SL.library=sl_libs) # using same candidate learners; could use different learners"

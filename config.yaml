@@ -1,0 +1,27 @@
+baseurl: https://example.org/
+title: KH STATS
+theme: hugo-creative-portfolio-theme
+languageCode: en-us
+disqusShortname: ''
+googleAnalytics: ''
+params:
+  copyright: '&copy;2022 Katherine Hoffman'
+  description: Describe your website
+  email: kathoffman.stats@gmail.com
+  navlinks:
+    - home: yes
+      name: Home
+      url: blog/
+    - name: About
+      url: about/
+    - name: Get in touch
+      url: contact/
+  sidebarAbout:
+    - Contributions towards more meaningful and reproducible medical research.
+  social:
+    email: kathoffman.stats@gmail.com
+    github: https://github.com/kathoffman
+    googleplus: https://scholar.google.com/citations?user=73RvTUoAAAAJ&hl=en
+    linkedin: https://www.linkedin.com/in/katherinelhoffman
+    twitter: https://twitter.com/kat_hoffman_
+  style: default

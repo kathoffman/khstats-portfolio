@@ -1,0 +1,1 @@
+"0","Q_A <- as.vector(predict(Q)$pred) # obtain predictions for everyone using the treatment they actually received"

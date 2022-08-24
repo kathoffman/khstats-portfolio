@@ -1,0 +1,24 @@
+---
+title: "Identification vs. Estimation for Causal Inference"
+author: "Katherine Hoffman"
+showonlyimage: true
+date: 2019-04-16T21:13:14-05:00
+categories: ["career"]
+image: /img/ident-vs-est.png
+weight: 15
+---
+
+
+<!--more-->
+
+<html>
+   <head>
+   </head>
+   
+   <body>
+   <a
+   href="https://github.com/kathoffman/causal-inference-visual-guides/blob/master/visual-guides/Identification-vs-Estimation.pdf">
+         <img alt="identification vs estimation in causal inference" src="/img/ident-vs-est.png" >
+      </a>
+   </body>
+</html>

@@ -1,0 +1,2 @@
+"0","k <- 10 # 10 fold cv"
+"0","cv_index <- sample(rep(1:k, each = n/k)) # create indices for each CV fold. We need each fold K to contain n (all the rows of our data set) divided by k rows. in our example this is 5000/10 = 500 rows in each fold"
