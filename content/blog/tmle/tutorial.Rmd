@@ -3,7 +3,7 @@ title: "An Illustrated Guide to TMLE, Part I: Introduction and Motivation"
 author: "Katherine Hoffman"
 date: 2020-12-11T00:13:14-05:00
 draft: false
-weight: 8
+weight: 5
 image: /img/tmle/parametric_assumptions_comic.jpg
 categories: ["statistics","R"]
 math: true

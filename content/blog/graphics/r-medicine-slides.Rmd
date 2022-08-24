@@ -1,0 +1,25 @@
+---
+title: "R/Medicine 2022: Making swimmer plots for longitudinal data using {ggplot}"
+author: "Katherine Hoffman"
+showonlyimage: true
+date: 2019-04-16T21:13:14-05:00
+tags: ["positivity","causal inference","taylor swift"]
+categories: ["comics","statistics"]
+image: /img/graphics/rmed-screenshot.png
+weight: 50
+---
+
+Slide deck.
+
+<!--more-->
+
+<html>
+   <head>
+   </head>
+   
+   <body>
+   <a
+   href="https://kathoffman.github.io/swimmer-plots/slides.html#1">
+         <img alt="r medicine slides" src="/img/graphics/rmed-screenshot.png"  >
+   </body>
+</html>
