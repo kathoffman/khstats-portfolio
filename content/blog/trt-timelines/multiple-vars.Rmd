@@ -3,7 +3,7 @@ title: "Using ggplot2 to create Treatment Timelines with Multiple Variables"
 author: "Katherine Hoffman"
 weight: 4
 date: 2022-06-08T21:13:14-05:00
-image: /img/trt-timeline/crop_swimmer.png 
+image: /img/trt-timelines/crop_swimmer.png 
 categories: ["R","data visualization"]
 tags: ["R","ggplot2","swimmer plots","treatment timelines","longitudinal survival"]
 output: 
