@@ -19,12 +19,6 @@ An R code walkthrough for treatment timelines or "swimmer" plots. These can help
 
 ***June 8, 2022.***
 
-> This post walks through code to create a timeline in `R` using `ggplot2`. These types of plots can help visualize **treatment or measurement patterns**, **time-varying covariates**, **outcomes**, and **loss to follow-up** in longitudinal data settings.
-
-You can view a corresponding slide deck I made for the 2022 R/Medicine [[here]](https://kathoffman.github.io/swimmer-plots/slides.html#1).
-
-[***Skip the step-by-step, just the code, please!***](#just-the-code)
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, results = "asis")
@@ -55,58 +49,65 @@ write_csv(dat_long, here::here("content/blog/trt-timelines/dat_trt_timeline.csv"
 ```{r, echo=F, warning=F, message=F}
 library(tidyverse)
 library(gt)
+library(rmarkdown)
 
 dat_long <- read_csv("https://raw.githubusercontent.com/kathoffman/steroids-trial-emulation/main/data/dat_trt_timeline.csv", col_types = list(id  = "c", steroids = "c", death = "c", severe = "c"))
 
 # define colors for all geometries with a color argument
 cols <- c("Severe hypoxia" = "#b24745", # red
-          "Intubated" = "darkslateblue", # navy
+          "Intubated" = "#483d8b", # navy
           "Not intubated" = "#74aaff", # lighter blue
           "Steroids"="#ffd966", # gold
-          "Death" = "black") 
-shapes <- c("Severe hypoxia" = 21,
-            "Steroids" = 15, # square
-            "Death" = 4) # cross # empty circle (control inside with fill argument if desired)
+          "Death" = "#000000") # black 
 
-shape_override <- c(21, NA, NA, 15, 4) # order matches `cols`: severe, intubation (yes/no), steroids, death
+shape_override <- c(21, NA, NA, 15, 4) # order matches `cols`:severe, intubation (yes/no), steroids, death
 line_override <- c(NA,1,1,NA,NA) # order matches `cols`:severe, intubation (yes/no), steroids, death
-stroke_override <- c(.8,1,1,1,1) # order matches `cols`:severe, intubation (yes/no), steroids, death
-size_override <- c(2.5,2.5,2.6,2,2) # order matches `cols`:severe, intubation (yes/no), steroids, death
+stroke_override <- c(1.2,1,1,1,1.4) # order matches `cols`:severe, intubation (yes/no), steroids, death
+size_override <- c(2.5,2.5,2.6,2.5,2) # order matches `cols`:severe, intubation (yes/no), steroids, death
 
 dat_swim <- 
    dat_long |>
   mutate(severe_this_day = case_when(severe == 1 ~ day),
          steroids_this_day = case_when(steroids == 1 ~ day),
-         death_this_day = case_when(death == 1 ~ day)) %>%
+         death_this_day = case_when(death == 1 ~ day)) |>
   group_by(id) |>
   mutate(max_day = max(day)) |>
   ungroup() |>
-  nest(cols = day:death_this_day) |>
-  arrange(max_day) |>
-  mutate(id_sorted = factor(row_number())) |>
-  unnest()
+  mutate(id = fct_reorder(factor(id), max_day))
 
 dat_swim |>
-  ggplot() +
-  geom_line(aes(x=day, y=id_sorted, col = intubation_status, group=id_sorted),
-            size=1.8) +
-  geom_point(aes(x=steroids_this_day, y=id_sorted, col="Steroids", shape="Steroids"), stroke=2) +
-  geom_point(aes(x=severe_this_day, y=id_sorted, col="Severe hypoxia", shape="Severe hypoxia"), size=2, stroke=1.5) +
-  geom_point(aes(x=death_this_day, y=id_sorted, col="Death", shape="Death"), size=2, stroke=1.5) +
+  ggplot(aes(y=id, group=id)) +
   theme_bw() +
-  scale_color_manual(values = cols, name="Patient Status") +
-  scale_shape_manual(values = shapes, name = "Patient Status") +
+  geom_line(aes(x=day,
+                col = intubation_status,
+                group=id),
+            size=1.8) +
+  geom_point(aes(x=steroids_this_day,
+                 col="Steroids"), 
+             stroke=2,
+             shape=15) +
+  geom_point(aes(x=severe_this_day,
+                 col="Severe hypoxia"),
+             size=2,
+             stroke=1.5,
+             shape=21) +
+  geom_point(aes(x=death_this_day,
+                 col="Death"),
+             size=2,
+             stroke=1.5,
+             shape=4) +
+  scale_color_manual(values = cols,
+                     name="Patient Status") + #BREAK
   guides(color = guide_legend(
                         override.aes = list(
+                                stroke = stroke_override,
+                                size = size_override,
                                 shape = shape_override,
                                 linetype = line_override)
-                                ),
-         shape = "none"
-             )+
+                                )) +
   labs(x="Days since hospitalization",y="Patient\nnumber",title="Treatment Timeline for N=30 Patients") +
   scale_x_continuous(expand=c(0,0)) + # remove extra white space 
-  theme(# text=element_text(family="Poppins"),
-        title = element_text(angle = 0, vjust=.5, size=14, face="bold"),
+  theme(title = element_text(angle = 0, vjust=.5, size=14, face="bold"),
         axis.title.y = element_text(angle = 0, vjust=.5, size=11, face="bold"),
         axis.title.x = element_text(size=13, face="bold", vjust=-0.5, hjust=0),
         axis.text.y = element_text(size=6, hjust=1.5),
@@ -122,7 +123,9 @@ dat_swim |>
 ```
 
 
+This post walks through code to create a timeline in `R` using `ggplot2`. These types of plots can help visualize **treatment or measurement patterns**, **time-varying covariates**, **outcomes**, and **loss to follow-up** in longitudinal data settings.
 
+You can view a corresponding slide deck I made with {flipbookr} for the 2022 R/Medicine [[here]](https://kathoffman.github.io/swimmer-plots/slides.html#1), or you can [skip to the end of this post to just see the code](#just-the-code).
 
 # Background
 
@@ -139,9 +142,10 @@ We will look at the treatment patterns of steroids as it relates to the timing o
 The data set is in long format with one row per patient. Let's first load the data set and libraries we'll need, then look at the first 20 rows:
 
 ```{r}
-# install.packages(c("tidyverse","gt","RCurl"))
+# install.packages(c("tidyverse","gt","RCurl","rmarkdown"))
 library(tidyverse)
 library(gt)
+library(rmarkdown)
 
 dat_long <- read_csv("https://raw.githubusercontent.com/kathoffman/steroids-trial-emulation/main/data/dat_trt_timeline.csv", col_types = list(id  = "c", steroids = "c", death = "c", severe = "c"))
 ```
@@ -150,8 +154,8 @@ dat_long <- read_csv("https://raw.githubusercontent.com/kathoffman/steroids-tria
 If we look at the first patient (id = `r slice(dat_long, 1) |> pull(id)`), we can see they were in the hospital for `r dat_long |> filter(id == (slice(dat_long, 1) |> pull(id))) |> nrow()` days, never intubated, never receive steroids, and ultimately die (`death` is `1` on the last day).
 
 ```{r}
-head(dat_long, n=20) |>
-  gt()
+head(dat_long) |>
+  paged_table()
 ```
 
 
@@ -179,7 +183,6 @@ dat_long |>
 We *could* edit the colors of the dots we don't want so that they're transparent (using `NA`), but when you have other non-mutually exclusive dots you want to show, it's simpler to just edit the data instead. So, we will now edit our data so that our three binary columns are turned into three `*_this_day` column, where:
 
 - The value is `NA` if the observation did not experience that exposure/outcome that day (remember each day is a new row)
-
 - The value is the `day` if the observation *did* experience the exposure/outcome. This is to make our `x` axis easy to specify in `ggplot2`.
 
 ```{r, results="asis"}
@@ -190,11 +193,7 @@ dat_swim <-
          death_this_day = case_when(death == 1 ~ day))
 ```
 
-While we're at it, let's modify the patient's IDs so that we can rearrange our plot by length of each individual's timeline. To do this, we will refactor the `id` variable by a new variable `id_sorted`.
-
-There are probably other ways to do this, but this is what I do. I first make a new variable called `max_day` that is the maximum day that the patient is in the study. I then `nest()` the data by `id` (by calling all the other columns).
-
-I then make my new column using `row_number()`, and `unnest()` the data, which gives me clean IDs in a sorted fashion:
+While we're at it, let's modify the patient's IDs so that we can rearrange our plot by length of each individual's timeline. To do this, we will reorder the factored `id` variable by a new variable `max_day`, or the length of time that patients are in the study.
 
 ```{r}
 dat_swim <- 
@@ -202,13 +201,11 @@ dat_swim <-
   group_by(id) |>
   mutate(max_day = max(day)) |>
   ungroup() |>
-  nest(cols = day:death_this_day) |>
-  arrange(max_day) |>
-  mutate(id_sorted = factor(row_number())) |>
-  unnest()
+  mutate(id = fct_reorder(factor(id), max_day))
 
-head(dat_swim) |> gt()
+head(dat_swim) |> paged_table()
 ```
+
 # Back to plotting
 
 Now, we can re-plot the steroids and intubation statuses using our new data. This time without all the `0` values for steroids showing.
@@ -216,34 +213,32 @@ Now, we can re-plot the steroids and intubation statuses using our new data. Thi
 ```{r}
 dat_swim |> 
   ggplot() +
-  geom_line(aes(x=day, y=id_sorted, col = intubation_status, group=id)) +
-  geom_point(aes(x=steroids_this_day, y=id_sorted, col="Steroids", shape="Steroids")) +
+  geom_line(aes(x=day, y=id, col = intubation_status, group=id)) +
+  geom_point(aes(x=steroids_this_day, y=id, col="Steroids", shape="Steroids")) +
   theme_bw()
 ```
 
-
 From this point on I'll save the plot as `p` and just keep adding onto it so you can see the new step.
 
-We'll see why we're doing this in a second, but in creating this first iteration of `p` using `geom_line()` and `geom_point()`, we also want to set the `col` and `shape` to match how we want the marker for steroids to appear in the legend. I'm also going to make minor edits to the `size` of the point geometry right now, as well as the width of each timeline itself (also using the `size` argument). Lastly, we are now going to use `id_sorted`.
+We'll see why we're doing this in a second, but in creating this first iteration of `p` using `geom_line()` and `geom_point()`, we also want to set the `col` to match how we want the marker for steroids to appear in the legend. I'm also going to make minor edits to the `size` and `shape` of the point geometry right now, as well as the width of each timeline itself (also using the `size` argument).
 
 ```{r}
 p <- 
   dat_swim |> 
   ggplot() +
-  geom_line(aes(x=day, y=id_sorted, col = intubation_status, group=id_sorted),
+  geom_line(aes(x=day, y=id, col = intubation_status, group=id),
             size=1.8) +
-  geom_point(aes(x=steroids_this_day, y=id_sorted, col="Steroids", shape="Steroids"), stroke=2) +
+  geom_point(aes(x=steroids_this_day, y=id, col="Steroids"), stroke=2, shape=15) +
   theme_bw()
 p
 ```
-
 
 Let's add hypoxia and death to the figure. We'll use `geom_point()` again, and again specify legend names for the `col` and `shape` arguments, and modify the `size` and `stroke` of our point geometries.
 
 ```{r}
 p <- p +
-  geom_point(aes(x=severe_this_day, y=id_sorted, col="Severe hypoxia", shape="Severe hypoxia"), size=2, stroke=1.5) +
-  geom_point(aes(x=death_this_day, y=id_sorted, col="Death", shape="Death"), size=2, stroke=1.5) 
+  geom_point(aes(x=severe_this_day, y=id, col="Severe hypoxia"), size=2, stroke=1.5, shape=21) +
+  geom_point(aes(x=death_this_day, y=id, col="Death"), size=2, stroke=1.5, shape=4) 
 p
 ```
 
@@ -263,10 +258,10 @@ I define my `cols` in a vector outside the plotting code to keep everything clea
 ```{r}
 # define colors for all geometries with a color argument
 cols <- c("Severe hypoxia" = "#b24745", # red
-          "Intubated" = "darkslateblue", # navy
+          "Intubated" = "#483d8b", # navy
           "Not intubated" = "#74aaff", # lighter blue
           "Steroids"="#ffd966", # gold
-          "Death" = "black") 
+          "Death" = "#000000") # black 
 ```
 
 After we set `values = cols`, the `name` argument is simply the title we want for our legend (I chose "Patient Status").
@@ -277,25 +272,13 @@ p <- p +
 p
 ```
 
-We can do the same to change shapes with `scale_shape_manual()`. If you don't want a shape for a certain status (e.g. intubation status), just leave it out of your vector.
-
-```{r}
-# define shapes for all geometries with a shape argument (geom_point)
-shapes <- c("Severe hypoxia" = 21,
-            "Steroids" = 15, # square
-            "Death" = 4) # cross # empty circle (control inside with fill argument if desired)
-
-p <- p + scale_shape_manual(values = shapes, name = "Patient Status")
-p
-```
-
 # Fix the Legend
 
-You'll notice that our legend does not match the changes we made to the colors and shapes right now. This is because we're stretching (possibly breaking) the grammar of graphics (the "gg" of `ggplot2`) rules by assigning different colors and shapes across variables. Although `ggplot2` wasn't designed to do what we're doing, we can override the legend aesthetics and still create a plot that shows correct and useful information.
+You'll notice that our legend does not match the changes we made to the shapes, size, or linetype  right now. This is because our legend only contains information on the colors, because that's all we're mapping to the aesthetics of our geometries right now (in `geom_point` and `geom_line`. We can override the color legend aesthetics and still create a plot that shows correct and useful information.
 
 We will do this by using the `guides()` function. We can control each aesthetic here. We will first override the `colors` legend with the code `guide_legend(override.aes = list(...))`.
 
-This allows us to *change the shapes of the color legend* by specifying a vector with the shapes we want in the order the labels appear in the legend. If we don't want a shape to appear on the legend, we will use `NA`.
+This allows us to *change the shapes of the color legend* by specifying a vector with the shapes, size, and line types we want in the order the labels appear in the legend. If we don't want a characteristic to appear on the legend, we will use `NA`.
 
 I only want to show shapes for certain statuses (severe hypoxia, steroid administration, death), and not the intubation status of a patient, so I'll set up my shape override vector accordingly. Note that the order in the legend follows the order of my color specification vector (`cols`).
 
@@ -310,37 +293,25 @@ p +
          ) 
 ```
 
-
-
 To remove the line through Death, Severe hypoxia, and Steroids in our legend, we can override the aesthetics for `linetype` with NA's for those three labels. We will specify the default, `linetype=1`, for our intubation status color labels.
 
 We can additionally override the stroke and size arguments to correspond to our point geometries.
 
 ```{r}
 line_override <- c(NA,1,1,NA,NA) # order matches `cols`:severe, intubation (yes/no), steroids, death
-stroke_override <- c(.8,1,1,1,1) # order matches `cols`:severe, intubation (yes/no), steroids, death
-size_override <- c(2.5,2.5,2.6,2,2) # order matches `cols`:severe, intubation (yes/no), steroids, death
+stroke_override <- c(1.2,1,1,1,1.4) # order matches `cols`:severe, intubation (yes/no), steroids, death
+size_override <- c(2.5,2.5,2.6,2.5,2) # order matches `cols`:severe, intubation (yes/no), steroids, death
 
-p +  guides(color = guide_legend(
+p <-
+  p +
+    guides(color = guide_legend(
                         override.aes = list(
+                                stroke = stroke_override,
                                 shape = shape_override,
-                                linetype = line_override)
+                                linetype = line_override,
+                                size = size_override)
                                 )
              )
-```
-
-Now that our color legend contains all necessary information, we can remove the shape legend using the argument `shape = "none"` in `guides()`.
-
-```{r}
-p <- p + 
-  guides(color = guide_legend(
-                        override.aes = list(
-                                shape = shape_override,
-                                linetype = line_override)
-                                ),
-         shape = "none"
-             )
-
 p
 ```
 
@@ -372,55 +343,48 @@ Hope this is helpful! As always let me know if you have any feedback or suggesti
 
 ```{r, eval=F}
 library(tidyverse)
-library(gt)
 
 dat_long <- read_csv("https://raw.githubusercontent.com/kathoffman/steroids-trial-emulation/main/data/dat_trt_timeline.csv", col_types = list(id  = "c", steroids = "c", death = "c", severe = "c"))
 
 # define colors for all geometries with a color argument
 cols <- c("Severe hypoxia" = "#b24745", # red
-          "Intubated" = "darkslateblue", # navy
+          "Intubated" = "#483d8b", # navy
           "Not intubated" = "#74aaff", # lighter blue
           "Steroids"="#ffd966", # gold
-          "Death" = "black") 
-shapes <- c("Severe hypoxia" = 21,
-            "Steroids" = 15, # square
-            "Death" = 4) # cross # empty circle (control inside with fill argument if desired)
+          "Death" = "#000000") # black 
 
 shape_override <- c(21, NA, NA, 15, 4) # order matches `cols`:severe, intubation (yes/no), steroids, death
 line_override <- c(NA,1,1,NA,NA) # order matches `cols`:severe, intubation (yes/no), steroids, death
-stroke_override <- c(.8,1,1,1,1) # order matches `cols`:severe, intubation (yes/no), steroids, death
-size_override <- c(2.5,2.5,2.6,2,2) # order matches `cols`:severe, intubation (yes/no), steroids, death
+stroke_override <- c(1.2,1,1,1,1.4) # order matches `cols`:severe, intubation (yes/no), steroids, death
+size_override <- c(2.5,2.5,2.6,2.5,2) # order matches `cols`:severe, intubation (yes/no), steroids, death
 
 # modify swimmer data to 1) only show events if yes 2) have an id ordered by max follow up
 dat_swim <- 
    dat_long |>
   mutate(severe_this_day = case_when(severe == 1 ~ day),
          steroids_this_day = case_when(steroids == 1 ~ day),
-         death_this_day = case_when(death == 1 ~ day)) %>%
+         death_this_day = case_when(death == 1 ~ day)) |>
   group_by(id) |>
   mutate(max_day = max(day)) |>
   ungroup() |>
-  nest(cols = day:death_this_day) |>
-  arrange(max_day) |>
-  mutate(id_sorted = factor(row_number())) |>
-  unnest()
+  mutate(id = fct_reorder(factor(id), max_day))
 
 dat_swim |>
   ggplot() +
-  geom_line(aes(x=day, y=id_sorted, col = intubation_status, group=id_sorted),
+  geom_line(aes(x=day, y=id, col = intubation_status, group=id),
             size=1.8) +
-  geom_point(aes(x=steroids_this_day, y=id_sorted, col="Steroids", shape="Steroids"), stroke=2) +
-  geom_point(aes(x=severe_this_day, y=id_sorted, col="Severe hypoxia", shape="Severe hypoxia"), size=2, stroke=1.5) +
-  geom_point(aes(x=death_this_day, y=id_sorted, col="Death", shape="Death"), size=2, stroke=1.5) +
+  geom_point(aes(x=steroids_this_day, y=id, col="Steroids"), shape=15, stroke=2) +
+  geom_point(aes(x=severe_this_day, y=id, col="Severe hypoxia"), size=2, stroke=1.5, shape=21) +
+  geom_point(aes(x=death_this_day, y=id, col="Death"), size=2, stroke=1.5, shape=4) +
   theme_bw() +
   scale_color_manual(values = cols, name="Patient Status") +
-  scale_shape_manual(values = shapes, name = "Patient Status") +
   guides(color = guide_legend(
                         override.aes = list(
+                                stroke = stroke_override,
                                 shape = shape_override,
-                                linetype = line_override)
-                                ),
-         shape = "none"
+                                linetype = line_override,
+                                size = size_override)
+                                )
              )+
   labs(x="Days since hospitalization",y="Patient\nnumber",title="Treatment Timeline for N=30 Patients") +
   scale_x_continuous(expand=c(0,0)) + # remove extra white space 
@@ -442,7 +406,7 @@ dat_swim |>
 
 # Session Info
 
-```{r}
+```{r, results='markup'}
 sessionInfo()
 ```
 
